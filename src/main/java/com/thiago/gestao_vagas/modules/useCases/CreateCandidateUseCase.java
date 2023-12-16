@@ -1,8 +1,8 @@
 package com.thiago.gestao_vagas.modules.useCases;
 
 import com.thiago.gestao_vagas.exceptions.UserFoundException;
-import com.thiago.gestao_vagas.modules.candidate.CandidateEntity;
 import com.thiago.gestao_vagas.modules.candidate.CandidateRepository;
+import com.thiago.gestao_vagas.modules.candidate.entities.CandidateEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
