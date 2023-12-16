@@ -12,12 +12,15 @@ public class CreateCompanyUseCase {
   @Autowired
   private CompanyRepository companyRepository;
 
-  public void execute(CompanyEntity companyEntity) {
-    this.companyRepository.findByCompanyName(companyEntity.getCompanyName())
+  public CompanyEntity execute(CompanyEntity companyEntity) {
+    this.companyRepository.findByCompanyNameOrEmail(
+        companyEntity.getCompanyName(),
+        companyEntity.getEmail()
+      )
       .ifPresent(company -> {
         throw new CompanyFoundException();
       });
 
-    this.companyRepository.save(companyEntity);
+    return this.companyRepository.save(companyEntity);
   }
 }
