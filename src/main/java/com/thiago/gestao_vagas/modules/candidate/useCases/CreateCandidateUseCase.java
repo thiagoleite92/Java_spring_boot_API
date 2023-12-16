@@ -1,4 +1,4 @@
-package com.thiago.gestao_vagas.modules.useCases;
+package com.thiago.gestao_vagas.modules.candidate.useCases;
 
 import com.thiago.gestao_vagas.exceptions.UserFoundException;
 import com.thiago.gestao_vagas.modules.candidate.CandidateRepository;
