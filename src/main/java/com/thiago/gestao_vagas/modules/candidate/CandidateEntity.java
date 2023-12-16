@@ -1,5 +1,6 @@
 package com.thiago.gestao_vagas.modules.candidate;
 
+import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import java.util.UUID;
@@ -7,6 +8,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 @Data
+@Entity(name = "candidate")
 public class CandidateEntity {
 
   private UUID id;
