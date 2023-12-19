@@ -10,4 +10,6 @@ public interface CompanyRepository extends JpaRepository<CompanyEntity, UUID> {
     String companyName,
     String email
   );
+
+  Optional<CompanyEntity> findByCompanyName(String companyName);
 }
