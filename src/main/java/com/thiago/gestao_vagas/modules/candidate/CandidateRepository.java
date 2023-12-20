@@ -11,4 +11,6 @@ public interface CandidateRepository
     String username,
     String email
   );
+
+  Optional<CandidateEntity> findByUsername(String username);
 }

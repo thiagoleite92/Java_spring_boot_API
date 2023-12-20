@@ -1,7 +1,7 @@
-package com.thiago.gestao_vagas.modules.company.controllers;
+package com.thiago.gestao_vagas.modules.candidate.controllers;
 
-import com.thiago.gestao_vagas.modules.company.dto.AuthCompanyDTO;
-import com.thiago.gestao_vagas.modules.company.useCases.AuthCompanyUseCase;
+import com.thiago.gestao_vagas.modules.candidate.dto.AuthCandidateRequestDTO;
+import com.thiago.gestao_vagas.modules.candidate.useCases.AuthCandidateUseCase;
 import jakarta.validation.Valid;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,23 +14,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
-public class AuthCompanyController {
+public class AuthCandidateController {
 
   @Autowired
-  private AuthCompanyUseCase authCompanyUseCase;
+  private AuthCandidateUseCase authCandidateUseCase;
 
-  @PostMapping("/company")
+  @PostMapping("/candidate")
   public ResponseEntity<Object> login(
-    @Valid @RequestBody AuthCompanyDTO authCompanyDTO
+    @Valid @RequestBody AuthCandidateRequestDTO authCandidateRequestDTO
   ) {
+    System.out.println(authCandidateRequestDTO);
     try {
-      String token = this.authCompanyUseCase.execute(authCompanyDTO);
+      var token = this.authCandidateUseCase.execute(authCandidateRequestDTO);
 
-      JSONObject jsonObject = new JSONObject();
-
-      return ResponseEntity
-        .ok()
-        .body(jsonObject.put("access_token", token).toString());
+      return ResponseEntity.ok().body(token);
     } catch (Exception e) {
       return ResponseEntity
         .status(HttpStatus.UNAUTHORIZED)
