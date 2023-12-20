@@ -15,6 +15,9 @@ public class SecurityConfig {
   @Autowired
   private SecurityFilter securityFilter;
 
+  @Autowired
+  private SecurityCandidateFilter securityCandidateFilter;
+
   @Bean
   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     System.out.println(http);
@@ -26,13 +29,17 @@ public class SecurityConfig {
           .permitAll()
           .requestMatchers("/company/")
           .permitAll()
-          .requestMatchers("/auth/company")
+          .requestMatchers("/company/auth")
           .permitAll()
-          .requestMatchers("/auth/candidate")
+          .requestMatchers("/candidate/auth")
           .permitAll();
         auth.anyRequest().authenticated();
       })
-      .addFilterBefore(this.securityFilter, BasicAuthenticationFilter.class);
+      .addFilterBefore(this.securityFilter, BasicAuthenticationFilter.class)
+      .addFilterBefore(
+        this.securityCandidateFilter,
+        BasicAuthenticationFilter.class
+      );
 
     return http.build();
   }
