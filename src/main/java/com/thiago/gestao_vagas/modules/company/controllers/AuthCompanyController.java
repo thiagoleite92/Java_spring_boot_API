@@ -3,7 +3,6 @@ package com.thiago.gestao_vagas.modules.company.controllers;
 import com.thiago.gestao_vagas.modules.company.dto.AuthCompanyDTO;
 import com.thiago.gestao_vagas.modules.company.useCases.AuthCompanyUseCase;
 import jakarta.validation.Valid;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,13 +23,9 @@ public class AuthCompanyController {
     @Valid @RequestBody AuthCompanyDTO authCompanyDTO
   ) {
     try {
-      String token = this.authCompanyUseCase.execute(authCompanyDTO);
+      var result = this.authCompanyUseCase.execute(authCompanyDTO);
 
-      JSONObject jsonObject = new JSONObject();
-
-      return ResponseEntity
-        .ok()
-        .body(jsonObject.put("access_token", token).toString());
+      return ResponseEntity.ok().body(result);
     } catch (Exception e) {
       return ResponseEntity
         .status(HttpStatus.UNAUTHORIZED)
